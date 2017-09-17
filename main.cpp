@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 		cout << "Entrada:";
 		teste.printMe();
 		int t = p.execute(teste);
-		cout << t << endl;
+		cout << "Saida: " << t << endl;
 	}
 
 	return 0;
