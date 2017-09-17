@@ -1,6 +1,4 @@
-#pragma once
 #include <vector>
-#include <iostream>
 
 template <typename T>
 class matrix
@@ -24,29 +22,15 @@ public:
   std::size_t ncol() const { return ncol_; }
 
   //funcao para retornar uma linha especificada 
-  matrix<T> getLine(std::size_t n) const{
-  	matrix<T> temp(1, ncol_, 0); //linha da matrix
+  std::vector<T> getLine(std::size_t n){
+  	std::vector<T> temp(ncol_); //linha da matrix
   	std::size_t i;
-  	std::size_t start = n * ncol_;
-  	std::size_t stop = n * ncol_ + ncol_;
+  	std::size_t start = n * nrow_;
+  	std::size_t stop = n * nrow_ + ncol_;
   	for(i = start; i < stop; i++){
-  		temp(0, i-start) = values_[i];
+  		temp[i-start] = values_[i];
   	}
   	return temp;
   }
 
-  // funcao para printar a matriz
-  void printMe(){
-  	int stop = nrow_ * ncol_;
-  	for (int i = 0; i < stop; ++i)
-  	{	
-  		if((i%ncol_) == 0 ){
-  			std::cout << std::endl;
-  		}
-  		std::cout << "[" << values_[i] << "] ";
-  	}
-  	std::cout << std::endl;	
-  }
-
-}; //end class matrix
-
+};
