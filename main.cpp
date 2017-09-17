@@ -31,11 +31,11 @@ int main(int argc, char const *argv[])
 
 	if(p.learn(input, output)){
 		cout << "\n\n" << endl;
-		cout << "## Executando teste ##" << endl;
-		cout << "Entrada:";
+		cout << "## Run ##" << endl;
+		cout << "Input: ";
 		teste.printMe();
 		int t = p.execute(teste);
-		cout << "Saida: " << t << endl;
+		cout << "Perceptron output: " << t << endl;
 	}
 
 	return 0;
