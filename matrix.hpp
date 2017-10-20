@@ -36,7 +36,7 @@ public:
   }
 
   // funcao para printar a matriz
-  void printMe(){
+  void printMe() const{
   	int stop = nrow_ * ncol_;
   	for (int i = 0; i < stop; ++i)
   	{	
@@ -47,6 +47,6 @@ public:
   	}
   	std::cout << std::endl;	
   }
-
+ 
 }; //end class matrix
 
