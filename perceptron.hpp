@@ -11,21 +11,15 @@ private:
 	size_t neu;				//number of neurons
 	double rate;			//value of the learning rate
 	matrix<double> weight_; //matrix of weights
-
+	
+	//calculo dos novos pesos da matriz de pesos
 	void updateWeight(matrix<int> x, int t, int Sout, int r){
-		// cout << "\nWeight before: " << endl;
-		// weight_.printMe();
-		// cout << "\nWrong input: " << endl;
-		// x.printMe();
-		//for(size_t r = 0 ; r < weight_.nrow(); r++){
-			for(size_t c = 0; c < weight_.ncol(); c++){
-				weight_(r,c) = weight_(r,c) + rate * (t-Sout) * x(0,c);
-			}	
-		//}
-		// cout << "\nWeight after: " << endl;
-		// weight_.printMe();
+		for(size_t c = 0; c < weight_.ncol(); c++){
+			weight_(r,c) = weight_(r,c) + rate * (t-Sout) * x(0,c);
+		}	
 	}
 
+	//funcao de ativacao 
 	int activationFunction(double value) const{
 		if(value < 0.5)
 			return 0;
@@ -42,18 +36,17 @@ public:
 	perceptron(int n_, int neu_, double rate_ ) : n(n_), neu(neu_), rate(rate_), weight_(neu_ , n_, 0.0)
 	{}
 	
+	//funcao de aprendizado
 	bool learn(matrix<int> m_input, matrix<int> m_output)
 	{	
 		cout << "\n### Learning... ###" << endl;
 		size_t ninput = m_input.nrow();
 		double value;
 		int Sout;
-		int flag = 0;
-		for (int out = 0; out < neu; out++) 
+		for (int i = 0; i < ninput; i++) 
 		{
-			for(int i = 0; i < ninput; i++) 
+			for(int out = 0; out < neu; out++) 
 			{
-				//cout << "\nINPUT >>>>>> " << i << endl;
 				value = 0.0;
 				for (int j = 0; j < n; j++) 
 				{
@@ -63,23 +56,21 @@ public:
 				Sout = activationFunction(value);   
 				if(Sout != m_output(i,out)){
 					int t = m_output(i,out);
-					//cout << "\n## Updating weights "<< i <<"-" << out << endl;
 					updateWeight(m_input.getLine(i), t, Sout, out);
 					i  = -1;					
 				}	
 			}
 		
 		}
-		// cout << "\n\n" << endl;
 		cout << "## Final weights ##";
 		weight_.printMe();
 	}
 	
+	//funcao de execucao
 	matrix<int> execute(matrix<int> m_input) const {
-		size_t ninput = m_input.nrow();
+		size_t ninput = m_input.nrow(); 
 		double value;
 		matrix<int> output(neu,1,0.0);
-		weight_.printMe();
 		for (int i = 0; i < neu; i++)
 		{
 			value = 0.0;
