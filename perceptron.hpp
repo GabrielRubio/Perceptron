@@ -19,7 +19,7 @@ private:
 		// x.printMe();
 		//for(size_t r = 0 ; r < weight_.nrow(); r++){
 			for(size_t c = 0; c < weight_.ncol(); c++){
-				weight_(r,c) = weight_(r,c) + rate * (t-Sout) * x(r,c);
+				weight_(r,c) = weight_(r,c) + rate * (t-Sout) * x(0,c);
 			}	
 		//}
 		// cout << "\nWeight after: " << endl;
@@ -48,10 +48,10 @@ public:
 		size_t ninput = m_input.nrow();
 		double value;
 		int Sout;
-
-		for (int i = 0; i < ninput; i++) 
+		int flag = 0;
+		for (int out = 0; out < neu; out++) 
 		{
-			for(int out = 0; out < neu; out++) 
+			for(int i = 0; i < ninput; i++) 
 			{
 				//cout << "\nINPUT >>>>>> " << i << endl;
 				value = 0.0;
@@ -63,10 +63,10 @@ public:
 				Sout = activationFunction(value);   
 				if(Sout != m_output(i,out)){
 					int t = m_output(i,out);
-					// cout << "\n## Updating weights ##" << endl;
+					//cout << "\n## Updating weights "<< i <<"-" << out << endl;
 					updateWeight(m_input.getLine(i), t, Sout, out);
-					i = -1;
-				}
+					i  = -1;					
+				}	
 			}
 		
 		}

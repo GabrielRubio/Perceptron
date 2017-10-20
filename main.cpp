@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
 
 	matrix<int> output2(4,2,0);
 
-	output2(0,0) = 0; output2(0,1) = 0;
+	output2(0,0) = 0; output2(0,1) = 1;
 	output2(1,0) = 0; output2(1,1) = 0;
 	output2(2,0) = 0; output2(2,1) = 0;
 	output2(3,0) = 1; output2(3,1) = 0;
