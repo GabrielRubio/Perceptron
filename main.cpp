@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 #include "perceptron.hpp"
 #include <iostream>
+#include <stdlib.h> 
 
 using namespace std;
 int main(int argc, char const *argv[])
@@ -19,7 +20,7 @@ int main(int argc, char const *argv[])
 	// matriz de saida esperada
 	matrix<int> output(4,1,0);
 
-	output(0,0) = 0; 
+	output(0,0) = 1; 
 	output(1,0) = 0; 
 	output(2,0) = 0; 
 	output(3,0) = 1; 
@@ -27,7 +28,7 @@ int main(int argc, char const *argv[])
 	// matriz para execucao apos treinamento
 	matrix<int> teste(1,3,0);
 
-	teste(0,0) = 1; teste(0,1) = 1; teste(0,2) = 0; 
+	teste(0,0) = atoi(argv[1]); teste(0,1) = atoi(argv[2]); teste(0,2) = atoi(argv[3]); 
 
 	//inicializacao do perceptron
 	perceptron<int> p;
@@ -62,15 +63,10 @@ int main(int argc, char const *argv[])
 	// matriz de saida esperada
 	matrix<int> output2(4,2,0);
 
-	output2(0,0) = 0; output2(0,1) = 1;
-	output2(1,0) = 0; output2(1,1) = 0;
-	output2(2,0) = 0; output2(2,1) = 0;
-	output2(3,0) = 1; output2(3,1) = 0;
-
-	// matriz para execucao apos treinamento
-	matrix<int> teste2(1,3,0);
-
-	teste2(0,0) = 1; teste2(0,1) = 1; teste2(0,2) = 1; 
+	output2(0,0) = 0; output2(0,1) = 0;
+	output2(1,0) = 0; output2(1,1) = 1;
+	output2(2,0) = 0; output2(2,1) = 1;
+	output2(3,0) = 1; output2(3,1) = 1;
 
 	//inicializacao do perceptron
 	perceptron<int> p2(3,2,0.5);
@@ -78,15 +74,15 @@ int main(int argc, char const *argv[])
 	//mostrando as tabelas
 	input2.printMe();
 	output2.printMe();
-	teste2.printMe();
+	teste.printMe();
 
 	//executando aprendizado e mostrando o retorno final
 	if(p2.learn(input2, output2)){
 		cout << "\n\n" << endl;
 		cout << "## Run ##" << endl;
 		cout << "Input: ";
-		teste2.printMe();
-		matrix<int> t = p2.execute(teste2);
+		teste.printMe();
+		matrix<int> t = p2.execute(teste);
 		cout << "\nPerceptron output2: ";
 		t.printMe();
 	}
